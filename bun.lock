@@ -1,0 +1,30 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "basebp",
+      "dependencies": {
+        "@minecraft/server": "^2.3.0-beta.1.21.110-preview.22",
+        "@minecraft/server-admin": "^1.0.0-beta.1.26.0-preview.28",
+        "@minecraft/server-ui": "^2.1.0-beta.1.21.110-preview.22",
+      },
+      "devDependencies": {
+        "typescript": "^5.9.2",
+      },
+    },
+  },
+  "packages": {
+    "@minecraft/common": ["@minecraft/common@1.2.0", "", {}, "sha512-JdmEq4P3Z/FtoBzhLijFgMSVFnFRrUoLwY8DHHrgtFo0mfLTOLTB1RErYjLMsA6b7BGVNxkX/pfFRiH7QZ0XwQ=="],
+
+    "@minecraft/server": ["@minecraft/server@2.4.0", "", { "peerDependencies": { "@minecraft/common": "^1.2.0", "@minecraft/vanilla-data": ">=1.20.70" } }, "sha512-xd9dOWQ4RhPQBCt2aui9tp/GCnjvXpi6ZHVxaUr0SPDHfh/GkMRWnyf2Ud6D3pEThp/0giOEtHY1sx2HN9Qd+A=="],
+
+    "@minecraft/server-admin": ["@minecraft/server-admin@1.0.0-beta.1.26.0-preview.28", "", { "peerDependencies": { "@minecraft/common": "^1.0.0", "@minecraft/server": "^1.17.0 || ^2.0.0" } }, "sha512-54GwR5TCN3mGZcwq2248zteDJUta5hNh1Qv48PeYl14I5Wvlr4l1Sm5qHv/5eDZRSdB1RFIDAz5XYwHDZ4apLw=="],
+
+    "@minecraft/server-ui": ["@minecraft/server-ui@2.1.0-beta.1.26.0-preview.28", "", { "peerDependencies": { "@minecraft/common": "^1.0.0", "@minecraft/server": "^2.0.0 || ^2.6.0-beta.1.26.0-preview.28" } }, "sha512-x2XOS5X4PE88c47Qxck79dQqUqmJSmZ/wONbQDwPjAsBmsnqhnFwpqxW/qd61ARqXkwJXwQkqKRCsfS9Z6gwUA=="],
+
+    "@minecraft/vanilla-data": ["@minecraft/vanilla-data@1.21.131", "", {}, "sha512-Ptw6t5mgyOODFmZxpZRRawjfhgcniGNf7kZqxV98RTAJi61tZ6wEMcI9muiWXw5yrNstYcTxJmqVjx1RaZKkxg=="],
+
+    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+  }
+}

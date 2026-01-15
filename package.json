@@ -1,0 +1,16 @@
+{
+  "name": "basebp",
+  "type": "module",
+  "scripts": {
+    "compile": "bun x tsc",
+    "watch": "bun x tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@minecraft/server": "^2.3.0-beta.1.21.110-preview.22",
+    "@minecraft/server-admin": "^1.0.0-beta.1.26.0-preview.28",
+    "@minecraft/server-ui": "^2.1.0-beta.1.21.110-preview.22"
+  }
+}
