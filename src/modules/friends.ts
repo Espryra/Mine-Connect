@@ -7,6 +7,7 @@ import {
   ServersDatabase,
   UsernameDatabase,
 } from "../constants";
+import Config from "../lib/config";
 import type { Friend } from "../types/friends";
 import Formatter from "../utils/formatter";
 import Menu from "./menu";
@@ -23,21 +24,22 @@ export default class Friends {
           `Hello, §b${player.name}§r!\n`,
           `Friends - ${friends.length}\n`,
           `What would you like to do?\n\n`,
-        ].join("\n")
+        ].join("\n"),
       )
       .button(
         "§l§1Add Friend\n§r§7[ §bAdd a Friend §7]",
-        "textures/ui/color_plus"
+        "textures/ui/color_plus",
       )
       .button(
         "§l§1View Requests\n§r§7[ §bView Friend Requests §7]",
-        "textures/ui/mail_icon"
-      );
+        "textures/ui/mail_icon",
+      )
+      .button("§l§4Back\n§r§7[ §cPrevious Page §7]", "textures/ui/icon_import");
 
     for (const friend of friends) {
       form.button(
         `§l§1${friend.username}\n§r§7[ §bView Friend §7]`,
-        "textures/ui/icon_steve"
+        "textures/ui/icon_steve",
       );
     }
 
@@ -54,8 +56,17 @@ export default class Friends {
       this.ViewRequestsMenu(player);
       return;
     }
+    if (response.selection === 2) {
+      if (player.hasTag(Config.admin_tag)) {
+        Menu.AdminView(player);
+      } else {
+        Menu.MemberMenu(player);
+      }
 
-    const friend = friends[response.selection - 2];
+      return;
+    }
+
+    const friend = friends[response.selection - 3];
 
     if (friend === undefined) {
       return;
@@ -65,15 +76,15 @@ export default class Friends {
   }
   public static async ManageFriendMenu(
     player: Player,
-    friend: Friend
+    friend: Friend,
   ): Promise<void> {
     const lastPlayed = JoinedHistoryDatabase.Get(friend.entity_id);
     const server = ServersDatabase.Get(lastPlayed?.id ?? "");
     const status = !lastPlayed
       ? "§cNo History"
       : !server
-      ? "§cUnknown Server"
-      : server.name;
+        ? "§cUnknown Server"
+        : server.name;
 
     const form = await new ActionFormData()
       .title("§l§1Friend Menu")
@@ -87,22 +98,22 @@ export default class Friends {
                   Math.floor(
                     (new Date().getTime() -
                       new Date(lastPlayed.joined).getTime()) /
-                      (1000 * 60)
+                      (1000 * 60),
                   ),
-                  true
+                  true,
                 )}`
               : ""
           }\n§r`,
           `What would you like to do?\n\n`,
-        ].join("\n")
+        ].join("\n"),
       )
       .button(
         "§l§1Join Last Played\n§r§7[ §bJoin Last Played Server §7]",
-        "textures/ui/dressing_room_customization"
+        "textures/ui/dressing_room_customization",
       )
       .button(
         "§l§1Remove Friend\n§r§7[ §bRemove Friend §7]",
-        "textures/ui/ErrorGlyph"
+        "textures/ui/ErrorGlyph",
       )
       .show(player);
 
@@ -149,13 +160,13 @@ export default class Friends {
     }
     if (targetsRequests.some((request) => request.entity_id === player.id)) {
       player.sendError(
-        "You have already sent a friend request to this player!"
+        "You have already sent a friend request to this player!",
       );
       return;
     }
     if (requests.some((request) => request.entity_id === target.entity_id)) {
       const index = requests.findIndex(
-        (request) => request.entity_id === target.entity_id
+        (request) => request.entity_id === target.entity_id,
       );
 
       if (index === -1) {
@@ -167,11 +178,11 @@ export default class Friends {
       friends.push(target);
       FriendRequestsDatabase.Set(
         player.id,
-        requests.map((request) => request.entity_id)
+        requests.map((request) => request.entity_id),
       );
       FriendsDatabase.Set(
         player.id,
-        friends.map((friend) => friend.entity_id)
+        friends.map((friend) => friend.entity_id),
       );
 
       const targetPlayer = world
@@ -188,7 +199,7 @@ export default class Friends {
     });
     FriendRequestsDatabase.Set(
       target.entity_id,
-      targetsRequests.map((request) => request.entity_id)
+      targetsRequests.map((request) => request.entity_id),
     );
 
     const targetPlayer = world
@@ -200,7 +211,7 @@ export default class Friends {
   }
   public static async RemoveFriendMenu(
     player: Player,
-    friend: Friend
+    friend: Friend,
   ): Promise<void> {
     const form = await new ActionFormData()
       .title("§l§1Remove Friend")
@@ -209,7 +220,7 @@ export default class Friends {
           `Hello, §b${player.name}§r!\n`,
           `Friend - ${friend.username}\n`,
           `Are you sure you would like to remove this friend?\n\n`,
-        ].join("\n")
+        ].join("\n"),
       )
       .button("§l§2Yes\n§r§7[ §bRemove Friend §7]", "textures/ui/confirm")
       .button("§l§4No\n§r§7[ §bCancel §7]", "textures/ui/cancel")
@@ -226,13 +237,13 @@ export default class Friends {
           player.id,
           friends
             .filter((entry) => entry.entity_id !== friend.entity_id)
-            .map((friend) => friend.entity_id)
+            .map((friend) => friend.entity_id),
         );
         FriendsDatabase.Set(
           friend.entity_id,
           targetFriends
             .filter((entry) => entry.entity_id !== player.id)
-            .map((friend) => friend.entity_id)
+            .map((friend) => friend.entity_id),
         );
 
         const targetPlayer = world
@@ -244,7 +255,7 @@ export default class Friends {
         break;
       case 1:
         player.sendSuccess(
-          `You have cancelled the removal of ${friend.username} as a friend!`
+          `You have cancelled the removal of ${friend.username} as a friend!`,
         );
         break;
     }
@@ -261,13 +272,13 @@ export default class Friends {
     const form = new ActionFormData()
       .title("§l§1Friend Requests")
       .body(
-        `Hello, §b${player.name}§r!\n\nRequests - ${requests.length}\n\nPlease select a request down below!\n\n`
+        `Hello, §b${player.name}§r!\n\nRequests - ${requests.length}\n\nPlease select a request down below!\n\n`,
       );
 
     for (const request of requests) {
       form.button(
         `§l§1${request.username}\n§r§7[ §bManage Request §7]`,
-        "textures/ui/mail_icon"
+        "textures/ui/mail_icon",
       );
     }
 
@@ -283,20 +294,20 @@ export default class Friends {
   }
   public static async ManageRequestMenu(
     player: Player,
-    request: Friend
+    request: Friend,
   ): Promise<void> {
     const form = await new ActionFormData()
       .title("§l§1Friend Request Menu")
       .body(
-        `Hello, §b${player.name}§r!\n\nRequester - ${request.username}\n\nWhat would you like to do?\n\n`
+        `Hello, §b${player.name}§r!\n\nRequester - ${request.username}\n\nWhat would you like to do?\n\n`,
       )
       .button(
         "§l§2Accept\n§r§7[ §bAccept Friend Request §7]",
-        "textures/ui/confirm"
+        "textures/ui/confirm",
       )
       .button(
         "§l§4Decline\n§r§7[ §bDecline Friend Request §7]",
-        "textures/ui/cancel"
+        "textures/ui/cancel",
       )
       .show(player);
 
@@ -309,7 +320,7 @@ export default class Friends {
         break;
       case 0:
         const index = requests.findIndex(
-          (entry) => entry.entity_id === request.entity_id
+          (entry) => entry.entity_id === request.entity_id,
         );
 
         if (index === -1) {
@@ -320,7 +331,7 @@ export default class Friends {
         requests.splice(index, 1);
         FriendRequestsDatabase.Set(
           player.id,
-          requests.map((request) => request.entity_id)
+          requests.map((request) => request.entity_id),
         );
 
         friends.push({
@@ -334,11 +345,11 @@ export default class Friends {
 
         FriendsDatabase.Set(
           player.id,
-          friends.map((friend) => friend.entity_id)
+          friends.map((friend) => friend.entity_id),
         );
         FriendsDatabase.Set(
           request.entity_id,
-          targetFriends.map((friend) => friend.entity_id)
+          targetFriends.map((friend) => friend.entity_id),
         );
 
         const targetPlayer = world
@@ -346,15 +357,15 @@ export default class Friends {
           .find((player) => player.id === request.entity_id);
 
         player.sendSuccess(
-          `You have accepted the friend request from ${request.username}!`
+          `You have accepted the friend request from ${request.username}!`,
         );
         targetPlayer?.sendSuccess(
-          `${player.name} has accepted your friend request!`
+          `${player.name} has accepted your friend request!`,
         );
         break;
       case 1: {
         const index = requests.findIndex(
-          (entry) => entry.entity_id === request.entity_id
+          (entry) => entry.entity_id === request.entity_id,
         );
 
         if (index === -1) {
@@ -365,7 +376,7 @@ export default class Friends {
         requests.splice(index, 1);
         FriendRequestsDatabase.Set(
           player.id,
-          requests.map((request) => request.entity_id)
+          requests.map((request) => request.entity_id),
         );
 
         const targetPlayer = world
@@ -373,10 +384,10 @@ export default class Friends {
           .find((player) => player.id === request.entity_id);
 
         player.sendSuccess(
-          `You have declined the friend request from ${request.username}!`
+          `You have declined the friend request from ${request.username}!`,
         );
         targetPlayer?.sendError(
-          `${player.name} has declined your friend request!`
+          `${player.name} has declined your friend request!`,
         );
         break;
       }
@@ -419,7 +430,7 @@ export default class Friends {
     const form = await new ModalFormData()
       .title("§l§1Search Player Menu")
       .label(
-        `Hello, §b${player.name}§r!\n\nPlease enter the player's username you would like to search down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease enter the player's username you would like to search down below!\n`,
       )
       .textField("Player's Username", "", {
         tooltip: "This username does not need to be fully typed out.",
@@ -432,7 +443,7 @@ export default class Friends {
 
     const entered = form.formValues[1] as string;
     const filtered = Object.entries(UsernameDatabase.Entries()).filter(
-      ([_, value]) => value.toLowerCase().includes(entered.toLowerCase())
+      ([_, value]) => value.toLowerCase().includes(entered.toLowerCase()),
     );
 
     if (filtered.length === 0) {
@@ -443,13 +454,13 @@ export default class Friends {
     const selectionForm = new ActionFormData()
       .title(`§l§g${filtered.length} §1Players Found`)
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a player down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a player down below!\n`,
       );
 
     for (const [_, username] of filtered) {
       selectionForm.button(
         `${username}§r\n§7[ §bView Player §7]`,
-        "textures/ui/icon_steve"
+        "textures/ui/icon_steve",
       );
     }
     const selectionFormResult = await selectionForm.show(player);
