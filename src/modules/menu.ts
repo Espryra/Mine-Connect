@@ -31,39 +31,39 @@ export default class Menu {
     const form = await new ActionFormData()
       .title("§l§1Mine Connect")
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a option down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a option down below!\n`,
       )
       .button(
         "§l§5Minecart SMP\n§r§7[ §dJoin Minecart SMP §7]",
-        "textures/items/minecart_normal"
+        "textures/items/minecart_normal",
       )
       .button(
         "§l§1Server List\n§r§7[ §bView All Servers §7]",
-        "textures/items/book_written"
+        "textures/items/book_written",
       )
       .button(
         "§l§1Join Any Server\n§r§7[ §bJoin Any MC Server §7]",
-        "textures/items/book_writable"
+        "textures/items/book_writable",
       )
       .button(
         "§l§1Join Random Server\n§r§7[ §bJoin a Random Server §7]",
-        "textures/items/recovery_compass_item"
+        "textures/items/recovery_compass_item",
       )
       .button(
         "§l§1My Servers\n§r§7[ §bView Your Saved Servers §7]",
-        "textures/ui/absorption_heart"
+        "textures/ui/absorption_heart",
       )
       .button(
         "§l§1Friends\n§r§7[ §bView Your Friends §7]",
-        "textures/ui/dressing_room_skins"
+        "textures/ui/dressing_room_skins",
       )
       .button(
         "§1§lSettings\n§r§7[ §bAdmin Only §7]",
-        "textures/ui/settings_glyph_color_2x"
+        "textures/ui/settings_glyph_color_2x",
       )
       .button(
         "§4§lClose Menu\n§r§7[ §cClose the Menu §7]",
-        "textures/ui/cancel"
+        "textures/ui/cancel",
       )
       .show(player);
     switch (form.selection) {
@@ -101,35 +101,35 @@ export default class Menu {
     const form = await new ActionFormData()
       .title("§l§1Mine Connect")
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a option down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a option down below!\n`,
       )
       .button(
         "§l§5Minecart SMP\n§r§7[ §dJoin Minecart SMP §7]",
-        "textures/items/minecart_normal"
+        "textures/items/minecart_normal",
       )
       .button(
         "§l§1Server List\n§r§7[ §bView All Servers §7]",
-        "textures/items/book_written"
+        "textures/items/book_written",
       )
       .button(
         "§l§1Join Any Server\n§r§7[ §bJoin Any MC Server §7]",
-        "textures/items/book_writable"
+        "textures/items/book_writable",
       )
       .button(
         "§l§1Join Random Server\n§r§7[ §bJoin a Random Server §7]",
-        "textures/items/recovery_compass_item"
+        "textures/items/recovery_compass_item",
       )
       .button(
         "§l§1My Servers\n§r§7[ §bView Your Saved Servers §7]",
-        "textures/ui/absorption_heart"
+        "textures/ui/absorption_heart",
       )
       .button(
         "§l§1Friends\n§r§7[ §bView Your Friends §7]",
-        "textures/ui/dressing_room_skins"
+        "textures/ui/dressing_room_skins",
       )
       .button(
         "§4§lClose Menu\n§r§7[ §cClose the Menu §7]",
-        "textures/ui/cancel"
+        "textures/ui/cancel",
       )
       .show(player);
 
@@ -196,7 +196,7 @@ export default class Menu {
     const form = new ActionFormData()
       .title("§l§1My Servers")
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a server down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a server down below!\n`,
       );
 
     const mapped = Object.entries(record);
@@ -218,7 +218,7 @@ export default class Menu {
   public static async ManageSavedServerMenu(
     player: Player,
     data: Server,
-    id: string
+    id: string,
   ): Promise<void> {
     const form = await new ActionFormData()
       .title("§l§1Manage Server")
@@ -231,15 +231,15 @@ export default class Menu {
           `Joins - ${data.joins}§r`,
           `Saves - ${this.GetSaves(id)}§r\n\n`,
           `What would you like to do with this server?\n`,
-        ].join("\n")
+        ].join("\n"),
       )
       .button(
         `§l§1Join Server\n§r§7[ §bJoin The Server §7]`,
-        "textures/ui/icon_multiplayer"
+        "textures/ui/icon_multiplayer",
       )
       .button(
         `§l§1Unsave Server\n§r§7[ §bUnsave The Server §7]`,
-        "textures/ui/cancel"
+        "textures/ui/cancel",
       )
       .button(`§l§4Back\n§r§7[ §cPrevious Page §7]`, "textures/ui/icon_import")
       .show(player);
@@ -264,6 +264,7 @@ export default class Menu {
         }
         break;
       case 2:
+        this.ViewSavedMenu(player);
         break;
     }
   }
@@ -271,7 +272,7 @@ export default class Menu {
     const form = await new ModalFormData()
       .title("§l§1Add Server Menu")
       .label(
-        `Hello, §b${player.name}§r!\n\nPlease enter the server's information you would like to add down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease enter the server's information you would like to add down below!\n`,
       )
       .textField("Server's IP", `§o${Config.featured_server_host}`)
       .textField("Server's Port", `§o${Config.featured_server_port}`)
@@ -334,19 +335,19 @@ export default class Menu {
     const form = await new ActionFormData()
       .title("§l§1Settings Menu")
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a option down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a option down below!\n`,
       )
       .button(
         "§l§1Add Server\n§r§7[ §bAdd a Server §7]",
-        "textures/ui/color_plus"
+        "textures/ui/color_plus",
       )
       .button(
         "§l§1Edit Server\n§r§7[ §bEdit a Server §7]",
-        "textures/ui/settings_pause_menu_icon"
+        "textures/ui/settings_pause_menu_icon",
       )
       .button(
         "§l§1Remove Server\n§r§7[ §bRemove a Server §7]",
-        "textures/blocks/barrier"
+        "textures/blocks/barrier",
       )
       .button("§l§4Back\n§r§7[ §cPrevious Page §7]", "textures/ui/icon_import")
       .show(player);
@@ -372,7 +373,7 @@ export default class Menu {
     const form = await new ModalFormData()
       .title("§l§1Add Server Menu")
       .label(
-        `Hello, §b${player.name}§r!\n\nPlease enter the server's information you would like to add down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease enter the server's information you would like to add down below!\n`,
       )
       .textField("Server's IP", `§o${Config.featured_server_host}`)
       .textField("Server's Port", `§o${Config.featured_server_port}`)
@@ -431,7 +432,7 @@ export default class Menu {
     const [id, data] = request;
     const form = await new ModalFormData()
       .label(
-        `Hello, §b${player.name}§r!\n\nPlease change the server's information you would like to edit down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease change the server's information you would like to edit down below!\n`,
       )
       .textField("Server's IP", `§o${data.host}`, {
         defaultValue: data.host,
@@ -508,7 +509,7 @@ export default class Menu {
           `Port - ${data.port}§r`,
           `Joins - ${data.joins}§r`,
           `Saves - ${saves}§r\n\n`,
-        ].join("\n")
+        ].join("\n"),
       )
       .button("§l§2Yes\n§r§7[ §cDelete Server §7]", "textures/ui/confirm")
       .button("§l§4No\n§r§7[ §cCancel §7]", "textures/ui/cancel")
@@ -522,7 +523,7 @@ export default class Menu {
       if (list.includes(id)) {
         SavedServersDatabase.Set(
           id,
-          list.filter((value) => value !== id)
+          list.filter((value) => value !== id),
         );
       }
     }
@@ -534,8 +535,8 @@ export default class Menu {
   public static async ServerListMenu(player: Player): Promise<void> {
     const servers = ShuffleArray<[string, Server]>(
       Object.entries(ServersDatabase.Entries()).filter(
-        ([_, value]) => value.admin_made
-      )
+        ([_, value]) => value.admin_made,
+      ),
     );
 
     if (servers.length === 0) {
@@ -546,11 +547,11 @@ export default class Menu {
     const form = new ActionFormData()
       .title("§l§1Server List")
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a server down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a server down below!\n`,
       )
       .button(
         "§l§1Search\n§r§7[ §bSearch for a Server §7]",
-        "textures/ui/magnifyingGlass"
+        "textures/ui/magnifyingGlass",
       );
 
     for (const [_, data] of servers) {
@@ -580,7 +581,7 @@ export default class Menu {
   public static async ManageServerMenu(
     player: Player,
     data: Server,
-    id: string
+    id: string,
   ): Promise<void> {
     const saved = SavedServersDatabase.Get(player.id);
 
@@ -600,19 +601,19 @@ export default class Menu {
           `Joins - ${data.joins}§r`,
           `Saves - ${this.GetSaves(id)}§r\n\n`,
           `What would you like to do with this server?\n`,
-        ].join("\n")
+        ].join("\n"),
       )
       .button(
         `§l§1Join Server\n§r§7[ §bJoin The Server §7]`,
-        "textures/ui/icon_multiplayer"
+        "textures/ui/icon_multiplayer",
       )
       .button(
         `§l§1Save Server\n§r§7[ §bSave The Server §7]`,
-        "textures/ui/color_plus"
+        "textures/ui/color_plus",
       )
       .button(
         `§l§1Save and Join  Server\n§r§7[ §bJoin And Save Server §7]`,
-        "textures/ui/share_google"
+        "textures/ui/share_google",
       )
       .button("§l§4Back\n§r§7[ §cPrevious Page §7]", "textures/ui/icon_import")
       .show(player);
@@ -630,7 +631,7 @@ export default class Menu {
           player.sendSuccess("Successfully saved server!");
         } else {
           player.sendError(
-            "Could not save server! This is more likely due to you already having the server saved."
+            "Could not save server! This is more likely due to you already having the server saved.",
           );
         }
         break;
@@ -646,7 +647,7 @@ export default class Menu {
 
   public static RandomJoin(player: Player): void {
     const servers = Object.entries(ServersDatabase.Entries()).filter(
-      ([_, value]) => value.admin_made
+      ([_, value]) => value.admin_made,
     );
     const random = servers[Math.floor(Math.random() * servers.length)]!;
 
@@ -655,7 +656,7 @@ export default class Menu {
   public static UnsaveServer(
     player: Player,
     data: Server,
-    id: string
+    id: string,
   ): boolean {
     const saved = SavedServersDatabase.Get(player.id);
 
@@ -711,12 +712,12 @@ export default class Menu {
     });
   }
   public static async SearchServerMenu(
-    player: Player
+    player: Player,
   ): Promise<[string, Server] | null> {
     const form = await new ModalFormData()
       .title("§l§1Search Server Menu")
       .label(
-        `Hello, §b${player.name}§r!\n\nPlease enter the server's name you would like to search down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease enter the server's name you would like to search down below!\n`,
       )
       .textField("Server's Name", "Minecart SMP", {
         tooltip:
@@ -732,7 +733,7 @@ export default class Menu {
     const filtered = Object.entries(ServersDatabase.Entries()).filter(
       ([_, value]) =>
         value.name.toLowerCase().includes(name.toLowerCase()) &&
-        value.admin_made
+        value.admin_made,
     );
 
     if (filtered.length === 0) {
@@ -743,13 +744,13 @@ export default class Menu {
     const selectionForm = new ActionFormData()
       .title(`§l§g${filtered.length} §1Servers Found`)
       .body(
-        `Hello, §b${player.name}§r!\n\nPlease select a server down below!\n`
+        `Hello, §b${player.name}§r!\n\nPlease select a server down below!\n`,
       );
 
     for (const [_, server] of filtered) {
       selectionForm.button(
         `${server.name}§r\n§7[ ${server.subtext} §r§7]`,
-        server.icon
+        server.icon,
       );
     }
 
